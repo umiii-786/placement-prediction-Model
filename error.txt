@@ -1,0 +1,17 @@
+2026-03-29 00:09:56,278 - src.logging_config - ERROR - Error occurred while loading YAML file
+Traceback (most recent call last):
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\data\data_ingestion.py", line 35, in load_yaml
+    test_size = params['test_size']
+                ~~~~~~^^^^^^^^^^^^^
+KeyError: 'test_size'
+2026-03-29 00:09:56,280 - src.logging_config - ERROR - Pipeline failed
+Traceback (most recent call last):
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\data\data_ingestion.py", line 73, in main
+    test_size = load_yaml(yaml_path="params.yaml")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\data\data_ingestion.py", line 42, in load_yaml
+    raise e
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\data\data_ingestion.py", line 35, in load_yaml
+    test_size = params['test_size']
+                ~~~~~~^^^^^^^^^^^^^
+KeyError: 'test_size'
