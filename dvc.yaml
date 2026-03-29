@@ -22,3 +22,13 @@ stages:
     outs:
     - data/processed
     - models/target_encoder.pkl
+
+
+  train_model:
+    cmd: python -m src.model.train_model
+    deps:
+    - data/processed
+    - src/model/train_model.py
+    outs:
+    - models/gradient_boosting_model.pkl
+    - reports/data.json

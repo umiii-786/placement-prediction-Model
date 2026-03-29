@@ -56,3 +56,24 @@ stages:
       hash: md5
       md5: 1d0280701b04fea6e85a67b3a6c9e0b7
       size: 264
+  train_model:
+    cmd: python -m src.model.train_model
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 5092ef2f792060503ff2cec81d7e5a45.dir
+      size: 314080
+      nfiles: 2
+    - path: src/model/train_model.py
+      hash: md5
+      md5: bacb0e2fc881d3fcee71a0638ae534d2
+      size: 4788
+    outs:
+    - path: models/gradient_boosting_model.pkl
+      hash: md5
+      md5: 6bb294110df30e456395c5d69854ef06
+      size: 139819
+    - path: reports/data.json
+      hash: md5
+      md5: b2349c8033b1bb7760823355a03b4131
+      size: 109
