@@ -34,3 +34,25 @@ stages:
       md5: f9537526ab197e8f6a9fbc90fabda45e.dir
       size: 464983
       nfiles: 2
+  transform_feature:
+    cmd: python -m src.features.transform_feature
+    deps:
+    - path: data/interim
+      hash: md5
+      md5: f9537526ab197e8f6a9fbc90fabda45e.dir
+      size: 464983
+      nfiles: 2
+    - path: src/features/transform_feature.py
+      hash: md5
+      md5: aa0ce8ed21209c0477f9ac237873aee0
+      size: 3850
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 5092ef2f792060503ff2cec81d7e5a45.dir
+      size: 314080
+      nfiles: 2
+    - path: models/target_encoder.pkl
+      hash: md5
+      md5: 1d0280701b04fea6e85a67b3a6c9e0b7
+      size: 264

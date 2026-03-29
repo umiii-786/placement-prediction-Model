@@ -14,3 +14,11 @@ stages:
     - src/data/data_ingestion.py
     outs:
     - data/interim
+  transform_feature:
+    cmd: python -m src.features.transform_feature
+    deps:
+    - data/interim
+    - src/features/transform_feature.py
+    outs:
+    - data/processed
+    - models/target_encoder.pkl
