@@ -34,3 +34,6 @@ jobs:
           DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run: |
           dvc repro
+
+      - name: checking Model Overfitting and Accuracy Threshold
+        run: python -m unittest testing.checking_model
