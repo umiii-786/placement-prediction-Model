@@ -12,7 +12,7 @@ jobs:
 
       - name: install python
         uses: actions/setup-python@v6
-        with: |
+        with: 
             python-version: "3.12.9"
 
       - name: Cache pip dependencies
