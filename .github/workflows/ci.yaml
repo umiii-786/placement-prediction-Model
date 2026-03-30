@@ -40,4 +40,4 @@ jobs:
 
       - name: Promote Model To Model Registery
         if: success()
-        run:  python scripts/register_model.py
+        run:  python -m scripts.register_model
