@@ -1,4 +1,4 @@
 [core]
     remote = origin
 ['remote "origin"']
-    url = C:\Users\M512C~1.UMA\AppData\Local\Temp
+    url = s3://placement-prediction-project

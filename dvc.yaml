@@ -32,3 +32,10 @@ stages:
     outs:
     - models/gradient_boosting_model.pkl
     - reports/data.json
+  model_testing:
+    cmd: python -m src.model.test_model
+    deps:
+    - data/processed
+    - models/
+    - reports/
+    - src/model/test_model.py

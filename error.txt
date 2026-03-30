@@ -15,3 +15,45 @@ Traceback (most recent call last):
     test_size = params['test_size']
                 ~~~~~~^^^^^^^^^^^^^
 KeyError: 'test_size'
+2026-03-30 11:26:37,235 - src.logging_config - ERROR - Error occurred during model evaluation
+Traceback (most recent call last):
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\model\test_model.py", line 89, in test_model
+    with mlflow.start_run(run_id=ids['run_id']):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\fluent.py", line 466, in start_run
+    active_run_obj = client.get_run(existing_run_id)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\client.py", line 437, in get_run
+    return self._tracking_client.get_run(run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\_tracking_service\client.py", line 122, in get_run
+    return self.store.get_run(run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\store\tracking\sqlalchemy_store.py", line 928, in get_run
+    run = self._get_run(run_uuid=run_id, session=session, eager=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\store\tracking\sqlalchemy_store.py", line 813, in _get_run
+    raise MlflowException(f"Run with id={run_uuid} not found", RESOURCE_DOES_NOT_EXIST)
+mlflow.exceptions.MlflowException: Run with id=2529889414ed40ff95a18a603840bc66 not found
+2026-03-30 11:26:37,270 - src.logging_config - ERROR - Pipeline failed
+Traceback (most recent call last):
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\model\test_model.py", line 125, in main
+    test_model(model, train_ds, test_ds)
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\src\model\test_model.py", line 89, in test_model
+    with mlflow.start_run(run_id=ids['run_id']):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\fluent.py", line 466, in start_run
+    active_run_obj = client.get_run(existing_run_id)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\client.py", line 437, in get_run
+    return self._tracking_client.get_run(run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\_tracking_service\client.py", line 122, in get_run
+    return self.store.get_run(run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\store\tracking\sqlalchemy_store.py", line 928, in get_run
+    run = self._get_run(run_uuid=run_id, session=session, eager=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\store\tracking\sqlalchemy_store.py", line 813, in _get_run
+    raise MlflowException(f"Run with id={run_uuid} not found", RESOURCE_DOES_NOT_EXIST)
+mlflow.exceptions.MlflowException: Run with id=2529889414ed40ff95a18a603840bc66 not found
