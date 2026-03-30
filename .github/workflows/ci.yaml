@@ -37,3 +37,7 @@ jobs:
 
       - name: checking Model Overfitting and Accuracy Threshold
         run: python -m unittest testing.checking_model
+
+      - name: Promote Model To Model Registery
+        if: success()
+        run:  python scripts/register_model.py
