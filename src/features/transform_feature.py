@@ -67,6 +67,7 @@ def transform_target_features(train_ds: pd.DataFrame, test_ds: pd.DataFrame) -> 
 def save_target_encoder(lbl: LabelEncoder):
     try:
         logger.info("Saving target encoder")
+        os.makedirs('models',exist_ok=True)
 
         with open(os.path.join('models','target_encoder.pkl'), 'wb') as f:
             pickle.dump(lbl, f)
