@@ -16,15 +16,14 @@ class TestModelPerformance(unittest.TestCase):
             cls.model = pickle.load(f)
 
         # Load dataset (replace with your path)
-        df = pd.read_csv("data/processed/test_ds.csv")
-
-        X = df.drop("target", axis=1)
-        y = df["target"]
+        train_ds = pd.read_csv("data/processed/train_ds.csv")
+        test_ds = pd.read_csv("data/processed/test_ds.csv")
 
         # Split data
-        cls.X_train, cls.X_test, cls.y_train, cls.y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
-        )
+        cls.X_train= train_ds.drop("PlacementStatus", axis=1)
+        cls.X_test=  test_ds.drop("PlacementStatus", axis=1)
+        cls.y_train= train_ds["PlacementStatus"]
+        cls.y_test=  test_ds["PlacementStatus"]
 
         # Predictions
         cls.y_train_pred = cls.model.predict(cls.X_train)
