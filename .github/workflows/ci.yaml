@@ -40,4 +40,6 @@ jobs:
 
       - name: Promote Model To Model Registery
         if: success()
+        env:
+          DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run:  python -m scripts.register_model
