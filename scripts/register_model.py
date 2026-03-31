@@ -18,27 +18,24 @@ def register_model_new(run_id: str, model_name: str):
     try:
         logger.info("Starting model registration (NEW MLflow API)")
 
-        try:
-            model_uri = f"runs:/{run_id}/model"
-
-            # Register the model
-            result = mlflow.register_model(
-                model_uri=model_uri,
-                name=model_name # This will create a registered model
-            )
-            # client.create_registered_model(model_name)
-            logger.info(f"Registered model '{model_name}' created")
-        except Exception:
-            logger.info(f"Model '{model_name}' already exists")
-
-        # Step 2: Define model URI
         model_uri = f"runs:/{run_id}/model"
+
+        try:
+            # Try to register the model
+            result = mlflow.register_model(model_uri=model_uri, name=model_name)
+            logger.info(f"Registered model '{model_name}' created")
+        except Exception as e:
+            # If model already exists, fetch the latest version
+            logger.warning(f"Model '{model_name}' already exists. Fetching latest version.")
+            from mlflow.tracking.client import MlflowClient
+            client = MlflowClient()
+            latest_version_info = client.get_latest_versions(name=model_name, stages=["None"])[0]
+            result = latest_version_info
+
         logger.info(f"Model URI: {model_uri}")
+        logger.info(f"Model registered with version {result.version}")
 
-
-        logger.info(f"Model registerd with version  {result.version}")
-
-        return model_name,result.version
+        return model_name, result.version
 
     except Exception:
         logger.exception("Error occurred during model registration")
