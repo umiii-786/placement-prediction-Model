@@ -6,7 +6,8 @@ import os
 import dagshub
 
 
-dagshub_pat=os.getenv("DAGSHUB_PAT")
+dagshub_pat="a55ae4d7356bf84fa662753c4cff9084c43da67d"
+# os.getenv("DAGSHUB_PAT")
 if not dagshub_pat:
     raise EnvironmentError('DAGSHUB_PAT environment variable is not setted ') 
 os.environ['MLFLOW_TRACKING_USERNAME']=dagshub_pat 
@@ -32,14 +33,16 @@ def register_model_new(run_id: str, model_name: str):
             logger.warning(f"Model '{model_name}' might already exist. Fetching latest version.")
             # Fetch latest version safely
             all_versions = client.get_latest_versions(name=model_name)
-            if not all_versions:
-                raise ValueError(f"No versions found for existing model '{model_name}'")
+            print(all_versions)
+            if not all_versions or len(all_versions)==0:
+                result=1
+                # raise ValueError(f"No versions found for existing model '{model_name}'")
             result = all_versions[0]
 
         logger.info(f"Model URI: {model_uri}")
-        logger.info(f"Model registered with version {result.version}")
+        logger.info(f"Model registered with version {result}")
 
-        return model_name, result.version
+        return model_name, result
 
     except Exception:
         logger.exception("Error occurred during model registration")
