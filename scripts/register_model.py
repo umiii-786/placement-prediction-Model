@@ -37,7 +37,8 @@ def register_model_new(run_id: str, model_name: str):
             if not all_versions or len(all_versions)==0:
                 result=1
                 # raise ValueError(f"No versions found for existing model '{model_name}'")
-            result = all_versions[0]
+            else:
+                result = all_versions[0]
 
         logger.info(f"Model URI: {model_uri}")
         logger.info(f"Model registered with version {result}")
