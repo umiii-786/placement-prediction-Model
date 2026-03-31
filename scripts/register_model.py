@@ -18,11 +18,15 @@ def register_model_new(run_id: str, model_name: str):
     try:
         logger.info("Starting model registration (NEW MLflow API)")
 
-        client = MlflowClient()
-
-        # Step 1: Create registered model (if not exists)
         try:
-            client.create_registered_model(model_name)
+            model_uri = f"runs:/{run_id}/model"
+
+            # Register the model
+            result = mlflow.register_model(
+                model_uri=model_uri,
+                name=model_name # This will create a registered model
+            )
+            # client.create_registered_model(model_name)
             logger.info(f"Registered model '{model_name}' created")
         except Exception:
             logger.info(f"Model '{model_name}' already exists")
@@ -31,16 +35,10 @@ def register_model_new(run_id: str, model_name: str):
         model_uri = f"runs:/{run_id}/model"
         logger.info(f"Model URI: {model_uri}")
 
-        # Step 3: Create model version
-        model_version = client.create_model_version(
-            name=model_name,
-            source=model_uri,
-            run_id=run_id
-        )
 
-        logger.info(f"Model version created: {model_version.version}")
+        logger.info(f"Model registerd with version  {result.version}")
 
-        return model_version.name, model_version.version
+        return model_name,result.version
 
     except Exception:
         logger.exception("Error occurred during model registration")
