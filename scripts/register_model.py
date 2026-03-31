@@ -80,7 +80,7 @@ def main()->None:
 
     ids = get_ids("reports/data.json")
 
-    model_name = "placement_prediction_model"
+    model_name = "placement-prediction-model-GB"
 
     # Register model
     name, version = register_model_new(
