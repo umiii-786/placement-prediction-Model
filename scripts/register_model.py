@@ -15,22 +15,26 @@ os.environ['MLFLOW_TRACKING_PASSWORD']=dagshub_pat
 mlflow.set_tracking_uri("https://dagshub.com/umiii-786/placement-prediction-Model.mlflow")
 
 def register_model_new(run_id: str, model_name: str):
+    """
+    Register a model in MLflow. If the model already exists, fetch the latest version.
+    """
     try:
         logger.info("Starting model registration (NEW MLflow API)")
 
         model_uri = f"runs:/{run_id}/model"
+        client = MlflowClient()
 
         try:
             # Try to register the model
             result = mlflow.register_model(model_uri=model_uri, name=model_name)
             logger.info(f"Registered model '{model_name}' created")
         except Exception as e:
-            # If model already exists, fetch the latest version
-            logger.warning(f"Model '{model_name}' already exists. Fetching latest version.")
-            from mlflow.tracking.client import MlflowClient
-            client = MlflowClient()
-            latest_version_info = client.get_latest_versions(name=model_name, stages=["None"])[0]
-            result = latest_version_info
+            logger.warning(f"Model '{model_name}' might already exist. Fetching latest version.")
+            # Fetch latest version safely
+            all_versions = client.get_latest_versions(name=model_name)
+            if not all_versions:
+                raise ValueError(f"No versions found for existing model '{model_name}'")
+            result = all_versions[0]
 
         logger.info(f"Model URI: {model_uri}")
         logger.info(f"Model registered with version {result.version}")
@@ -43,23 +47,26 @@ def register_model_new(run_id: str, model_name: str):
 
 
 def promote_model_to_production(model_name: str, version: int):
+    """
+    Promote a registered model version to Production stage using alias.
+    """
     try:
         logger.info(f"Promoting model {model_name} v{version} to Production")
 
         client = MlflowClient()
 
+        # Modern MLflow alias method
         client.set_registered_model_alias(
             name=model_name,
             alias="production",
-            version=version
+            version=str(version)  # ensure version is string
         )
 
-        logger.info("Model promoted to Production using alias")
+        logger.info(f"Model '{model_name}' v{version} promoted to Production")
 
     except Exception:
         logger.exception("Error promoting model")
         raise
-
 
 def get_ids(ids_path: str):
     try:
