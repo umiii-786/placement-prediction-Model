@@ -56,7 +56,7 @@ def save_model_pickle(model, model_name: str):
     try:
         logger.info("Saving model as pickle file")
 
-        # Create models directory if not exists
+        # Create models directory if not exists 
         os.makedirs('models', exist_ok=True)
 
         file_path = os.path.join('models', f"{model_name}.pkl")
@@ -89,7 +89,7 @@ def log_model_and_parameters(model, parameters, signature):
                     artifact_path="model", 
                     signature=signature
                 )
-            logger.info("Model logged successfully")
+            logger.info("Model logged successfully!")
 
             run_id = run.info.run_id
             model_name='model'
