@@ -14,33 +14,20 @@ os.environ['MLFLOW_TRACKING_PASSWORD']=dagshub_pat
 
 mlflow.set_tracking_uri("https://dagshub.com/umiii-786/placement-prediction-Model.mlflow")
 
-def register_model_new(run_id: str, model_name: str):
+def register_model_new(run_id: str, model_name: str,reg_model_name):
     try:
         logger.info("Starting model registration (NEW MLflow API)")
 
         client = MlflowClient()
 
-        # Step 1: Create registered model (if not exists)
-        try:
-            client.create_registered_model(model_name)
-            logger.info(f"Registered model '{model_name}' created")
-        except Exception:
-            logger.info(f"Model '{model_name}' already exists")
+        # Step 1:  register the model 
+        
+        model_uri = f"runs:/{run_id}/{model_name}"
+        mv = mlflow.register_model(model_uri, reg_model_name)
+        logger.info(f"Registered model '{model_name}'  with version {mv.version}")
 
-        # Step 2: Define model URI
-        model_uri = f"runs:/{run_id}/model"
-        logger.info(f"Model URI: {model_uri}")
 
-        # Step 3: Create model version
-        model_version = client.create_model_version(
-            name=model_name,
-            source=model_uri,
-            run_id=run_id
-        )
-
-        logger.info(f"Model version created: {model_version.version}")
-
-        return model_version.name, model_version.version
+        return mv.name, mv.version
 
     except Exception:
         logger.exception("Error occurred during model registration")
@@ -85,12 +72,13 @@ def main()->None:
 
     ids = get_ids("reports/data.json")
 
-    model_name = "placement_prediction_model"
+    reg_model_name = "placement_prediction_model"
 
     # Register model
     name, version = register_model_new(
         run_id=ids['run_id'],
-        model_name=model_name
+        model_name=ids['model_name'],
+        reg_model_name=reg_model_name
     )
 
     # Promote to production
