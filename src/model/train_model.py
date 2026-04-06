@@ -10,7 +10,8 @@ import pickle
 
 # Initialize DagsHub + MLflow
 
-dagshub_pat=os.getenv("DAGSHUB_PAT")
+# dagshub_pat=os.getenv("DAGSHUB_PAT")
+dagshub_pat="a55ae4d7356bf84fa662753c4cff9084c43da67d"
 if not dagshub_pat:
     raise EnvironmentError('DAGSHUB_PAT environment variable is not setted ') 
 os.environ['MLFLOW_TRACKING_USERNAME']=dagshub_pat 
@@ -84,11 +85,10 @@ def log_model_and_parameters(model, parameters, signature):
 
             # Log model
             logged_model = mlflow.sklearn.log_model(
-                sk_model=model,
-                name='model',
-                signature=signature
-            )
-
+                    sk_model=model,
+                    artifact_path="model",   # ✅ required for registry
+                    signature=signature
+                )
             logger.info("Model logged successfully")
 
             run_id = run.info.run_id

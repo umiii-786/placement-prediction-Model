@@ -10,7 +10,8 @@ import dagshub
 
 # Initialize DagsHub + MLflow
 
-dagshub_pat=os.getenv("DAGSHUB_PAT")
+# dagshub_pat=os.getenv("DAGSHUB_PAT")
+dagshub_pat="a55ae4d7356bf84fa662753c4cff9084c43da67d"
 if not dagshub_pat:
     raise EnvironmentError('DAGSHUB_PAT environment variable is not setted ') 
 os.environ['MLFLOW_TRACKING_USERNAME']=dagshub_pat 

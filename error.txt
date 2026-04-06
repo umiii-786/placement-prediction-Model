@@ -57,3 +57,14 @@ Traceback (most recent call last):
   File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\store\tracking\sqlalchemy_store.py", line 813, in _get_run
     raise MlflowException(f"Run with id={run_uuid} not found", RESOURCE_DOES_NOT_EXIST)
 mlflow.exceptions.MlflowException: Run with id=2529889414ed40ff95a18a603840bc66 not found
+2026-04-06 14:18:08,702 - src.logging_config - ERROR - Error occurred during model registration
+Traceback (most recent call last):
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\scripts\register_model.py", line 27, in register_model_new
+    mv = mlflow.register_model(model_uri, reg_model_name)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\_model_registry\fluent.py", line 148, in register_model
+    return _register_model(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\M.UMAIR\Desktop\mlops\placement_prediction1\placement-prediction\myenv\Lib\site-packages\mlflow\tracking\_model_registry\fluent.py", line 199, in _register_model
+    raise MlflowException(
+mlflow.exceptions.MlflowException: Unable to find a logged_model with artifact_path model under run 760b0379d036457297cc5fc2ff2a50e9

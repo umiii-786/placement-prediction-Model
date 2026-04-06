@@ -6,7 +6,8 @@ import os
 import dagshub
 
 
-dagshub_pat=os.getenv("DAGSHUB_PAT")
+# dagshub_pat=os.getenv("DAGSHUB_PAT")
+dagshub_pat="a55ae4d7356bf84fa662753c4cff9084c43da67d"
 if not dagshub_pat:
     raise EnvironmentError('DAGSHUB_PAT environment variable is not setted ') 
 os.environ['MLFLOW_TRACKING_USERNAME']=dagshub_pat 
@@ -80,6 +81,7 @@ def main()->None:
         model_name=ids['model_name'],
         reg_model_name=reg_model_name
     )
+    print(name,' ',version )
 
     # Promote to production
     promote_model_to_production(name, version)
