@@ -86,7 +86,7 @@ def log_model_and_parameters(model, parameters, signature):
             # Log model
             logged_model = mlflow.sklearn.log_model(
                     sk_model=model,
-                    artifact_path="model",   # ✅ required for registry
+                    artifact_path="model", 
                     signature=signature
                 )
             logger.info("Model logged successfully")
