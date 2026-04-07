@@ -84,25 +84,24 @@ def log_model_and_parameters(model, parameters, signature):
             logger.info("Parameters logged successfully")
 
             # Log model
-            logged_model = mlflow.sklearn.log_model(
+            logged_model =mlflow.sklearn.log_model(
                     sk_model=model,
-                    artifact_path="model", 
-                    signature=signature
+                    name="model"
                 )
             logger.info("Model logged successfully!")
-
-            run_id = run.info.run_id
+            run_id=run.info.run_id
+            model_id = logged_model.model_id
             model_name='model'
-            logger.info(f"Run ID: {run_id}, Model name: {model_name}")
+            logger.info(f"run ID:{run_id} model ID: {model_id}, Model name: {model_name}")
 
-            return run_id, model_name
+            return model_id, run_id,model_name
 
     except Exception:
         logger.exception("Error occurred during MLflow logging")
         raise
 
 
-def save_ids(run_id: str, model_name: str):
+def save_ids(model_id: str, model_name: str,run_id:str):
     try:
         logger.info("Saving run_id and model_id to JSON")
 
@@ -110,7 +109,8 @@ def save_ids(run_id: str, model_name: str):
 
         ids = {
             'model_name': model_name,
-            'run_id': run_id
+            'model_id': model_id,
+            'run_id': run_id,
         }
 
         file_path = os.path.join('reports', 'data.json')
@@ -159,14 +159,14 @@ def main() -> None:
 
 
         # Log model
-        run_id, model_name = log_model_and_parameters(
+        model_id,run_id, model_name = log_model_and_parameters(
             model,
             model_params,
             model_signature
         )
 
         # Save IDs
-        save_ids(run_id, model_name)
+        save_ids(model_id, model_name,run_id=run_id)
 
         logger.info("Training pipeline completed successfully")
 

@@ -17,17 +17,18 @@ os.environ['MLFLOW_TRACKING_PASSWORD'] = dagshub_pat
 mlflow.set_tracking_uri("https://dagshub.com/umiii-786/placement-prediction-Model.mlflow")
 
 
-def register_model_new(run_id: str, model_name: str,reg_model_name):
+def register_model_new(model_id: str, model_name: str,reg_model_name):
     try:
         logger.info("Starting model registration (MLflow)")
+        model_uri = f"models:/{model_id}"
 
-        model_uri = f"runs:/{run_id}/model"
         client = MlflowClient()
 
         # Step 1:  register the model 
-        
-        model_uri = f"runs:/{run_id}/{model_name}"
-        mv = mlflow.register_model(model_uri, reg_model_name)
+        mv=mlflow.register_model(
+            model_uri,
+            reg_model_name
+        )
         logger.info(f"Registered model '{model_name}'  with version {mv.version}")
 
 
@@ -85,7 +86,7 @@ def main() -> None:
 
     # Register model
     name, version = register_model_new(
-        run_id=ids['run_id'],
+        model_id=ids['model_id'],
         model_name=ids['model_name'],
         reg_model_name=reg_model_name
     )

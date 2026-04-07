@@ -66,17 +66,17 @@ stages:
       nfiles: 2
     - path: src/model/train_model.py
       hash: md5
-      md5: f71d1efc009277ad76e25e4099ac2236
-      size: 4993
+      md5: 861dab7d71ed6e908f4192a9bdc10612
+      size: 5111
     outs:
     - path: models/gradient_boosting_model.pkl
       hash: md5
-      md5: 199a77663b4db88267aec6c3d6e6e7a4
-      size: 140826
+      md5: 540d08dbb88d021af275ebdf5440730d
+      size: 140395
     - path: reports/data.json
       hash: md5
-      md5: e451595240274923c234806f92afa7af
-      size: 82
+      md5: 3749c829943ce758c8c8556677422888
+      size: 137
   model_testing:
     cmd: python -m src.model.test_model
     deps:
@@ -87,15 +87,15 @@ stages:
       nfiles: 2
     - path: models/
       hash: md5
-      md5: 4c4aeb89d73397f79265df70b7da40fa.dir
-      size: 141090
+      md5: 23348700ff4b72f52cc4b0d9f82592a7.dir
+      size: 140659
       nfiles: 3
     - path: reports/
       hash: md5
-      md5: 10cde6f879e8ed3d76bcd7752b720dfb.dir
-      size: 94
+      md5: 7748450ddf449c582cd05ac3150fedd0.dir
+      size: 146
       nfiles: 4
     - path: src/model/test_model.py
       hash: md5
-      md5: 17496163d8a6e6fab464479b91b1df3f
-      size: 4549
+      md5: 025caf942bd37f7e7f825ce29e982d8f
+      size: 4491
