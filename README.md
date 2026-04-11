@@ -18,7 +18,7 @@ This repository serves as the core development environment for the **Placement P
 ## 🏗️ Development Architecture
 The architecture below outlines the systematic flow from raw data ingestion to the final registration of the model in the production registry. It highlights the separation between local experimentation and the automated CI/CD validation gates.
 
-![Workflow Architecture](images/development Stage of Placement project.png)
+![Workflow Architecture](images/dev_stage.png)
 
 ---
 
