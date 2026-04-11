@@ -124,4 +124,4 @@ Our **GitHub Actions** workflow acts as the final gatekeeper:
 Once a model is registered with the Production tag, it is picked up by our deployment infrastructure. The deployment repository handles the containerization of the model into a FastAPI service and manages the cloud infrastructure on AWS using a Blue-Green strategy for zero-downtime updates.
 
 👉 View the FAST-API and Checkout Deployment Workflow: ## 🔗 
-[![portfolio](https://img.shields.io/badge/View_Placement_API-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://katherineoelsner.com/)
+[![portfolio](https://img.shields.io/badge/View_Placement_API-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/umiii-786/placement-prediction-system)
